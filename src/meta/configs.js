@@ -155,7 +155,11 @@ Configs.cookie = {
 			cookie.domain = nconf.get('cookieDomain') || Meta.config.cookieDomain;
 		}
 
-		if (nconf.get('secure')) {
+		const sec = nconf.get('secure');
+		console.log('%%%%%%%%%%%%%%%%%%%%%%%% type of secure is', typeof sec);
+
+		if (nconf.get('secure') && nconf.get('secure').toLowerCase() === 'true') {
+			console.log('no no no secure goes true!!!');
 			cookie.secure = true;
 		}
 
