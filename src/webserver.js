@@ -20,6 +20,7 @@ var useragent = require('express-useragent');
 var favicon = require('serve-favicon');
 var detector = require('spider-detector');
 var helmet = require('helmet');
+var onHeaders = require('on-headers');
 
 var Benchpress = require('benchpressjs');
 var db = require('./database');
@@ -153,6 +154,18 @@ function setupExpressApp(app) {
 	const spiderDetectorMiddleware = detector.middleware();
 	app.use(function spiderDetector(req, res, next) {
 		spiderDetectorMiddleware(req, res, next);
+	});
+
+	app.use(function (req, res, next) {
+		if (req.originalUrl !== '/login') {
+			next();
+			return;
+		}
+		onHeaders(res, function () {
+			console.log(req.originalUrl);
+			console.log(this.getHeaders());
+		});
+		next();
 	});
 
 	app.use(session({
