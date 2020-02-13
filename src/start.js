@@ -91,6 +91,8 @@ function setupConfigs() {
 	const relativePath = urlObject.pathname !== '/' ? urlObject.pathname.replace(/\/+$/, '') : '';
 	nconf.set('base_url', urlObject.protocol + '//' + urlObject.host);
 	nconf.set('secure', urlObject.protocol === 'https:');
+	console.log('$$$$$$$$ secure set to - ', nconf.get('secure'));
+
 	nconf.set('use_port', !!urlObject.port);
 	nconf.set('relative_path', relativePath);
 	nconf.set('port', nconf.get('PORT') || nconf.get('port') || urlObject.port || (nconf.get('PORT_ENV_VAR') ? nconf.get(nconf.get('PORT_ENV_VAR')) : false) || 4567);

@@ -162,7 +162,7 @@ function setupExpressApp(app) {
 			return;
 		}
 		onHeaders(res, function () {
-			console.log(req.originalUrl);
+			console.log(req.originalUrl, nconf.get('secure'));
 			console.log(this.getHeaders());
 		});
 		next();
